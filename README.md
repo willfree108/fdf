@@ -1,37 +1,66 @@
-## Welcome to GitHub Pages
+## Welcome to FDF
 
-You can use the [editor on GitHub](https://github.com/willfree108/fdf/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+A 42 project in C with a tiny graphic lib (miniLibX), beginning of the infography track.
+Wireframe (literraly) a map.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+It's also done under the 42 norm:
+  - a function musn't exceed 25 lines.
+  - a file can't exceed 5 functions.
+  - a lot of lib are forbidden
+  - a lot of things like that ...
+  
+# GIF
 
-### Markdown
+![](https://media.giphy.com/media/3og0IAQCwWzrihcBbi/giphy.gif)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+[If it doesn't load, please click here](https://media.giphy.com/media/3og0IAQCwWzrihcBbi/giphy.gif)
 
-```markdown
-Syntax highlighted code block
+# Interesting parts
 
-# Header 1
-## Header 2
-### Header 3
+```
+// on src/calc.c
+void		calc(t_vertex *v, t_env *e)
+{
+	init(v, e);
+	tz(v, e);
+	rotx(v, e);
+	roty(v, e);
+	rotz(v, e);
+	projection(v, e);
+	screen(v, e);
+	scale(v, e);
+	tx(v, e);
+	ty(v, e);
+}
 
-- Bulleted
-- List
+// on src/draw.c
+void		draw(t_env *e)
+{
+	t_vertex *tmp;
+	t_vertex *cur;
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+	e->img = mlx_new_image(e->mlx, WIDTH, HEIGHT);
+	e->bits = 24;
+	e->endian = 1;
+	e->sl = e->bits * e->n;
+	e->data = mlx_get_data_addr(e->img, &e->bits, &e->sl, &e->endian);
+	while (e->v)
+	{
+		tmp = e->v;
+		e->v = e->v->down;
+		cur = e->v;
+		while (tmp)
+		{
+			draw_dot(e, tmp->x, tmp->y, tmp->color);
+			tmp->next ? draw_line(e, tmp, tmp->next) : 0;
+			cur ? draw_line(e, tmp, cur) : 0;
+			tmp = tmp->next;
+			if (cur && cur->next)
+				cur = cur->next;
+		}
+	}
+	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/willfree108/fdf/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Have a nice day.
