@@ -1,6 +1,6 @@
 ## Welcome to FDF
 
-A 42 project in C with a tiny graphic lib (miniLibX), beginning of the track infography.
+A 42 project in C with a tiny graphic lib (miniLibX), beginning of the infography track.
 Wireframe (literraly) a map.
 
 It's also done under the 42 norm:
@@ -12,7 +12,9 @@ It's also done under the 42 norm:
 # GIF
 
 ![](https://media.giphy.com/media/3og0IAQCwWzrihcBbi/giphy.gif)
+
 [If it doesn't load, please click here](https://media.giphy.com/media/3og0IAQCwWzrihcBbi/giphy.gif)
+
 # Interesting parts
 
 ```
